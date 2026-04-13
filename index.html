@@ -2,75 +2,46 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UCC Generator</title>
+    <title>Меню написания</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .card { background: #1e1e1e; padding: 20px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h2 { color: #00d2ff; margin: 0 0 15px 0; font-size: 22px; }
-        textarea { width: 100%; height: 200px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; resize: none; box-sizing: border-box; font-size: 14px; line-height: 1.4; }
-        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-bottom: 10px; }
+        .card { background: #1e1e1e; padding: 20px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; }
+        textarea { width: 100%; height: 200px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; resize: none; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
         .btn-gen { background: #00d2ff; color: #000; }
-        .btn-copy { background: #3d3d3d; color: #fff; }
+        .btn-copy { background: #333; color: #fff; }
         .btn-link { background: #ff4d4d; color: white; text-decoration: none; display: block; line-height: 50px; border-radius: 8px; font-weight: bold; margin-top: 10px; }
-        button:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>УЦЦ ГЕНЕРАТОР 🤡</h2>
-        <button class="btn-gen" onclick="generate()">СГЕНЕРИРОВАТЬ ТЕКСТ</button>
-        <textarea id="output" readonly placeholder="Нажми кнопку выше..."></textarea>
-        <button class="btn-copy" onclick="copyText()">СКОПИРОВАТЬ</button>
-        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">ОСТАВИТЬ ОТЗЫВ</a>
+        <h2>Меню написания 🤡</h2>
+        <button class="btn-gen" onclick="doGen()">ГЕНЕРИРОВАТЬ</button>
+        <textarea id="out" readonly placeholder="Нажми кнопку..."></textarea>
+        <button class="btn-copy" onclick="doCopy()">СКОПИРОВАТЬ</button>
+        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">САЙТ СИНЕМА ПАРК</a>
     </div>
 
     <script>
-        const tg = window.Telegram.WebApp;
-        if (tg) tg.expand();
+        function doGen() {
+            const g = ["Здравствуйте! Пишу вам от лица зрителей г. Сочи.", "Добрый день! Обращаюсь от имени фанатов из Сочи.", "Приветствую! Мы, группа кинозрителей Центрального района."];
+            const m = ["В июне 2026 состоится финал «Удивительного Цифрового Цирка». Студия Glitch готова к прокату.", "4-7 июня 2026 - премьера 9 серии УЦЦ. Весь мир уже ставит её в расписание."];
+            const e = ["Просим добавить её в расписание КИНО МореМолл. Гарантируем аншлаг!", "В Сочи у проекта 100% узнаваемость. Не упустите релиз года!"];
 
-        function generate() {
-            const greetings = [
-                "Здравствуйте! Пишу вам от лица зрителей города Сочи.",
-                "Добрый день! Обращаюсь к вам по поручению фанатов из Сочи.",
-                "Приветствую! Мы, группа кинозрителей Центрального района Сочи."
-            ];
+            const res = g[Math.floor(Math.random()*g.length)] + "\n\n" + 
+                        m[Math.floor(Math.random()*m.length)] + "\n\n" + 
+                        e[Math.floor(Math.random()*e.length)];
             
-            const messages = [
-                "В июне 2026 года (с 4 по 7 число) состоится мировая премьера финала УЦЦ (9 серия). Студия Glitch Productions готова к сотрудничеству с киносетями.",
-                "Мы очень ждем выход финального эпизода УЦЦ в начале июня 2026 года. Этот проект имеет колоссальный успех во всем мире.",
-                "4-7 июня 2026 года выходит Гранд-финал Удивительного Цифрового Цирка. Мы просим организовать показы этого эпизода в вашем кинотеатре."
-            ];
-            
-            const ends = [
-                "Учитывая успех аниме-показов в МореМолле, мы уверены, что залы будут полными. Ждем предзаказ!",
-                "Просим добавить 9 серию в расписание КИНО МореМолл. Гарантируем аншлаг и огромный интерес аудитории!",
-                "В Сочи у проекта стопроцентная узнаваемость. Не упустите главный анимационный релиз года!"
-            ];
-
-            const r1 = greetings[Math.floor(Math.random() * greetings.length)];
-            const r2 = messages[Math.floor(Math.random() * messages.length)];
-            const r3 = ends[Math.floor(Math.random() * ends.length)];
-
-            // Сборка текста с четкими переносами строк
-            const finalResult = r1 + "\n\n" + r2 + "\n\n" + r3;
-            document.getElementById("output").value = finalResult;
+            document.getElementById("out").value = res;
         }
 
-        function copyText() {
-            const area = document.getElementById("output");
-            if (!area.value) return;
-            
-            area.select();
-            area.setSelectionRange(0, 99999); // Для мобилок
+        function doCopy() {
+            const t = document.getElementById("out");
+            t.select();
             document.execCommand("copy");
-            
-            if (tg && tg.showAlert) {
-                tg.showAlert("Текст скопирован!");
-            } else {
-                alert("Текст скопирован!");
-            }
+            if(window.Telegram.WebApp.showAlert) window.Telegram.WebApp.showAlert("Скопировано!");
+            else alert("Скопировано!");
         }
     </script>
 </body>
