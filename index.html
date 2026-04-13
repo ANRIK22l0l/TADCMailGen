@@ -1,0 +1,32 @@
+];
+        const conclusions = [
+            "В России и конкретно в Центральном районе Сочи у проекта огромная фан-база — узнаваемость УЦЦ практически 100%. Мы гарантируем полную заполняемость залов и высокий спрос на предзаказ билетов. Не упустите главный анимационный релиз года!",
+            "Фан-база УЦЦ в Сочи (особенно в Центральном районе) просто огромна. Аншлаги и раскупленные по предзаказу билеты гарантированы. Ждем релиз года на ваших экранах!",
+            "Узнаваемость проекта в нашем городе почти 100%. Мы, зрители Центрального района, обещаем полные залы. Очень надеемся, что вы не упустите этот шанс!"
+        ];
+
+        // Функция выбора случайного элемента из массива
+        function getRandom(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        // Основная функция генерации
+        function generateText() {
+            const result = ${getRandom(greetings)} ${getRandom(intros)}\n\n${getRandom(cores)} ${getRandom(details)}\n\n${getRandom(argumentsList)} ${getRandom(conclusions)};
+            document.getElementById("resultText").value = result;
+        }
+
+        // Функция копирования
+        function copyText() {
+            const textToCopy = document.getElementById("resultText");
+            if (!textToCopy.value) return;
+            
+            textToCopy.select();
+            document.execCommand("copy");
+            
+            // Всплывающее уведомление Telegram
+            tg.showAlert("Текст успешно скопирован! Теперь вы можете вставить его на сайте.");
+        }
+    </script>
+</body>
+</html>
