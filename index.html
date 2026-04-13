@@ -17,26 +17,22 @@
 <body>
     <div class="card">
         <h2>Меню написания 🤡</h2>
-        <button onclick="generateText()">СГЕНЕРИРОВАТЬ ТЕКСТ</button>
-        <textarea id="result" readonly placeholder="Нажми кнопку..."></textarea>
-        <button class="btn-copy" onclick="copyResult()">СКОПИРОВАТЬ</button>
+        <button onclick="runGen()">СГЕНЕРИРОВАТЬ ТЕКСТ</button>
+        <textarea id="txtOut" readonly placeholder="Нажми кнопку..."></textarea>
+        <button class="btn-copy" onclick="runCopy()">СКОПИРОВАТЬ</button>
         <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-red">САЙТ СИНЕМА ПАРК</a>
     </div>
     <script>
-        function generateText() {
-            var starts = ["Здравствуйте! Пишу от лица зрителей Сочи.", "Добрый день! Обращаюсь от фанатов из Сочи.", "Приветствую! Мы, группа зрителей Центрального района."];
-            var middles = ["В июне 2026 состоится финал УЦЦ. Студия Glitch готова к прокату.", "4-7 июня 2026 - премьера 9 серии УЦЦ. Весь мир ставит её в расписание."];
-            var ends = ["Просим добавить её в расписание КИНО МореМолл. Будет аншлаг!", "В Сочи у проекта 100% узнаваемость. Ждем релиз на ваших экранах!"];
-            
-            var s = starts[Math.floor(Math.random() * starts.length)];
-            var m = middles[Math.floor(Math.random() * middles.length)];
-            var e = ends[Math.floor(Math.random() * ends.length)];
-            
-            document.getElementById("result").value = s + "\n\n" + m + "\n\n" + e;
+        function runGen() {
+            var s = ["Здравствуйте! Пишу от лица зрителей Сочи.", "Добрый день! Обращаюсь от фанатов из Сочи.", "Приветствую! Мы, группа зрителей Центрального района."];
+            var m = ["В июне 2026 состоится финал УЦЦ. Студия Glitch готова к прокату.", "4-7 июня 2026 - премьера 9 серии УЦЦ. Весь мир ставит её в расписание."];
+            var e = ["Просим добавить её в расписание КИНО МореМолл. Будет аншлаг!", "В Сочи у проекта 100% узнаваемость. Ждем релиз на ваших экранах!"];
+            var res = s[Math.floor(Math.random()*s.length)] + "\n\n" + m[Math.floor(Math.random()*m.length)] + "\n\n" + e[Math.floor(Math.random()*e.length)];
+            document.getElementById("txtOut").value = res;
         }
-        function copyResult() {
-            var box = document.getElementById("result");
-            box.select();
+        function runCopy() {
+            var b = document.getElementById("txtOut");
+            b.select();
             document.execCommand("copy");
             alert("Скопировано!");
         }
