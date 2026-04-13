@@ -4,40 +4,33 @@
     <meta charset="UTF-8">
     <title>Меню написания</title>
     <style>
-        body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
+        body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
         .card { background: #1e1e1e; padding: 25px; border-radius: 15px; width: 100%; max-width: 600px; text-align: center; }
-        textarea { width: 100%; height: 350px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; font-size: 14px; line-height: 1.4; }
-        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background: #00d2ff; color: #000; font-size: 16px; margin-bottom: 10px; }
-        .btn-copy { background: #333; color: #fff; }
-        .btn-link { background: #ff4d4d; color: #fff; text-decoration: none; display: block; line-height: 50px; border-radius: 8px; margin-top: 10px; font-weight: bold; }
+        textarea { width: 100%; height: 400px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; font-size: 14px; }
+        button { width: 100%; padding: 15px; border-radius: 8px; border: none; background: #00d2ff; font-weight: bold; cursor: pointer; }
+        .btn-link { background: #ff4d4d; color: white; text-decoration: none; display: block; padding: 15px; border-radius: 8px; margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>Меню написания 🤡</h2>
-        <button onclick="gen()">СГЕНЕРИРОВАТЬ ПИСЬМО</button>
-        <textarea id="out" readonly placeholder="Нажми кнопку..."></textarea>
-        <button class="btn-copy" onclick="cp()">СКОПИРОВАТЬ</button>
+        <h2>Меню написания</h2>
+        <button onclick="showText()">ПОКАЗАТЬ ПИСЬМО</button>
+        <textarea id="out" readonly></textarea>
+        <button onclick="copyText()" style="background:#333; color:#fff; margin-top:10px;">СКОПИРОВАТЬ</button>
         <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">САЙТ СИНЕМА ПАРК</a>
     </div>
 
     <script>
-        function gen() {
-            var starts = ["Здравствуйте!", "Добрый день!", "Приветствуем руководство КИНО МореМолл!"];
-            var ends = ["Надеемся на положительное решение.", "Ждем вашего ответа.", "Будем рады обратной связи."];
-            
-            var s = starts[Math.floor(Math.random() * starts.length)];
-            var e = ends[Math.floor(Math.random() * ends.length)];
-            
-            var body = "Обращаюсь к вам от лица инициативной группы зрителей г. Сочи. Мы ценим ваше внимание к громким анимационным премьерам и просим включить в расписание гранд-финал «Удивительного Цифрового Цирка» (4–7 июня 2026). Это самое ожидаемое событие года, фан-база координируется через канал: https://t.me/+wDP_MX3aQjM5M2Uy. Мы гарантируем высокую заполняемость залов. Если требуется формат аренды или коллективной заявки, просим сообщить условия. Для связи: violentionkosuko@gmail.com";
-            
-            document.getElementById("out").value = s + "\n\n" + body + "\n\n" + e + "\n\nС уважением,\nИнициативная группа зрителей г. Сочи";
+        function showText() {
+            var txt = "Здравствуйте!\n\nОбращаюсь к вам от лица инициативной группы зрителей и фан-сообщества города Сочи.\n\nМы внимательно следим за репертуаром кинотеатра «КИНО МореМолл» и ценим ваше внимание к громким анимационным премьерам. В связи с этим просим вас рассмотреть возможность включения в расписание показа гранд-финала мирового хита «Удивительный Цифровой Цирк» (The Amazing Digital Circus: Final Act) от студии Glitch Productions.\n\nПочему это событие важно для вашего кинотеатра:\nДата мировой премьеры: 4–7 июня 2026 года.\nОгромный спрос: Данный проект — самое ожидаемое независимое анимационное событие года.\nГотовая аудитория: В Центральном районе Сочи уже сформировано активное сообщество, координирующееся через наш канал: https://t.me/+wDP_MX3aQjM5M2Uy. Мы готовы обеспечить высокую заполняемость залов и отличные показатели предзаказов.\nЭксклюзивность: Показ финального эпизода на большом экране станет уникальным событием для городской молодежной культуры.\n\nМы готовы оказать информационную поддержку и скоординировать зрителей для организованного выкупа билетов. Если для данного релиза требуется формат аренды зала или коллективной заявки, просим сообщить условия и актуальную стоимость.\n\nДля обратной связи и обсуждения деталей, пожалуйста, пишите на почту нашего главы: violentionkosuko@gmail.com\n\nНадеемся на положительное решение и на то, что «КИНО МореМолл» станет главной площадкой для этого грандиозного финала в нашем городе.\n\nС уважением,\nИнициативная группа зрителей г. Сочи";
+            document.getElementById('out').value = txt;
         }
-        function cp() {
-            var t = document.getElementById("out");
-            t.select();
-            document.execCommand("copy");
-            alert("Скопировано!");
+
+        function copyText() {
+            var el = document.getElementById('out');
+            el.select();
+            document.execCommand('copy');
+            alert('Скопировано!');
         }
     </script>
 </body>
