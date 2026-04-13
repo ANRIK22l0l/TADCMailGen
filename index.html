@@ -3,110 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UCC Generator Dark</title>
+    <title>UCC GEN</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* Темная тема */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a; /* Глубокий серый */
-            color: #ffffff;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background: #2d2d2d;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        h2 { color: #00d2ff; margin-bottom: 10px; }
-        p { font-size: 0.9em; color: #bbb; margin-bottom: 20px; }
-
-        textarea {
-            width: 100%;
-            height: 150px;
-            background: #3d3d3d;
-            border: 1px solid #555;
-            border-radius: 10px;
-            color: #fff;
-            padding: 12px;
-            font-size: 14px;
-            resize: none;
-            box-sizing: border-box;
-            margin-bottom: 15px;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 16px;
-        }
-
+        body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: #1e1e1e; padding: 25px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { color: #00d2ff; margin-bottom: 20px; }
+        textarea { width: 100%; height: 180px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; resize: none; box-sizing: border-box; font-size: 14px; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-bottom: 10px; transition: 0.2s; }
         .btn-gen { background: #00d2ff; color: #000; }
-        .btn-gen:active { transform: scale(0.98); background: #0099cc; }
-
-        .btn-copy { background: #444; color: #fff; }
-        .btn-copy:active { background: #666; }
-
-        .btn-link { 
-            background: #ff4d4d; 
-            color: white; 
-            text-decoration: none;
-            display: block;
-            line-height: 45px;
-            height: 45px;
-            margin-top: 15px;
-            border-radius: 8px;
-        }
+        .btn-copy { background: #333; color: #fff; }
+        .btn-link { background: #ff4d4d; color: white; text-decoration: none; display: block; line-height: 50px; border-radius: 8px; font-weight: bold; }
+        button:active { transform: scale(0.97); }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h2>Генератор УЦЦ 🤡</h2>
-        <p>Создай уникальный текст для СИНЕМА ПАРК</p>
-
-        <button class="btn-gen" onclick="generateText()">СГЕНЕРИРОВАТЬ</button>
-        
-        <textarea id="resultText" readonly placeholder="Текст появится здесь..."></textarea>
-        
-        <button class="btn-copy" onclick="copyText()">КОПИРОВАТЬ ТЕКСТ</button>
-        
-        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">ОСТАВИТЬ ОТЗЫВ (СИНЕМА ПАРК)</a>
+    <div class="card">
+        <h2>ГЕНЕРАТОР УЦЦ 🤡</h2>
+        <button class="btn-gen" onclick="generate()">СГЕНЕРИРОВАТЬ</button>
+        <textarea id="output" readonly placeholder="Нажми кнопку выше..."></textarea>
+        <button class="btn-copy" onclick="copy()">КОПИРОВАТЬ</button>
+        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">САЙТ СИНЕМА ПАРК</a>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        const greetings = ["Здравствуйте!", "Приветствую!", "Добрый день!"];
-        const intros = ["Пишу вам от лица группы зрителей в г. Сочи.", "Обращаюсь от имени фанатов из Сочи."];
-        const cores = ["4-7 июня 2026 г. будет премьера финала УЦЦ.", "В июне 2026 выходит «Гранд-финал» Цифрового Цирка."];
-        const argumentsList = ["Учитывая успех «Дандадана», просим добавить УЦЦ в МореМолл.", "Просим включить 9 серию в расписание, спрос будет огромным!"];
-        const conclusions = ["Гарантируем полные залы!", "Не упустите главный релиз года!", "Ждем предзаказы!"];
+        const g = ["Здравствуйте!", "Приветствую!", "Добрый день!"];
+        const m = ["4-7 июня 2026 состоится финал УЦЦ. Студия Glitch готова к прокату.", "В июне 2026 выходит 9 серия УЦЦ. Просим включить её в расписание."];
+        const e = ["Гарантируем полные залы в МореМолл!", "В Сочи у проекта огромная фан-база. Ждем премьеру!"];
 
-        function getRandom(array) {
-            return array[Math.floor(Math.random() * array.length)];
+        function generate() {
+            const text = g[Math.floor(Math.random()*g.length)] + "\n\n" + m[Math.floor(Math.random()*m.length)] + "\n\n" + e[Math.floor(Math.random()*e.length)];
+            document.getElementById("output").value = text;
         }
 
-        function generateText() {
-            const text = ${getRandom(greetings)} ${getRandom(intros)}\n\n${getRandom(cores)}\n\n${getRandom(argumentsList)} ${getRandom(conclusions)};
-            document.getElementById("resultText").value = text;
+        function copy() {
+            const area = document.getElementById("output");
+            if (!area.value) return;
+            area.select();
+            document.execCommand("copy");
+            if(tg.showAlert) tg.showAlert("Скопировано!"); else alert("Скопировано!");
         }
+    </script>
+</body>
+</html>
