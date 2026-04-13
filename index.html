@@ -1,32 +1,112 @@
-];
-        const conclusions = [
-            "В России и конкретно в Центральном районе Сочи у проекта огромная фан-база — узнаваемость УЦЦ практически 100%. Мы гарантируем полную заполняемость залов и высокий спрос на предзаказ билетов. Не упустите главный анимационный релиз года!",
-            "Фан-база УЦЦ в Сочи (особенно в Центральном районе) просто огромна. Аншлаги и раскупленные по предзаказу билеты гарантированы. Ждем релиз года на ваших экранах!",
-            "Узнаваемость проекта в нашем городе почти 100%. Мы, зрители Центрального района, обещаем полные залы. Очень надеемся, что вы не упустите этот шанс!"
-        ];
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UCC Generator Dark</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* Темная тема */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a; /* Глубокий серый */
+            color: #ffffff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-        // Функция выбора случайного элемента из массива
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #2d2d2d;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h2 { color: #00d2ff; margin-bottom: 10px; }
+        p { font-size: 0.9em; color: #bbb; margin-bottom: 20px; }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: #3d3d3d;
+            border: 1px solid #555;
+            border-radius: 10px;
+            color: #fff;
+            padding: 12px;
+            font-size: 14px;
+            resize: none;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn-gen { background: #00d2ff; color: #000; }
+        .btn-gen:active { transform: scale(0.98); background: #0099cc; }
+
+        .btn-copy { background: #444; color: #fff; }
+        .btn-copy:active { background: #666; }
+
+        .btn-link { 
+            background: #ff4d4d; 
+            color: white; 
+            text-decoration: none;
+            display: block;
+            line-height: 45px;
+            height: 45px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Генератор УЦЦ 🤡</h2>
+        <p>Создай уникальный текст для СИНЕМА ПАРК</p>
+
+        <button class="btn-gen" onclick="generateText()">СГЕНЕРИРОВАТЬ</button>
+        
+        <textarea id="resultText" readonly placeholder="Текст появится здесь..."></textarea>
+        
+        <button class="btn-copy" onclick="copyText()">КОПИРОВАТЬ ТЕКСТ</button>
+        
+        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">ОСТАВИТЬ ОТЗЫВ (СИНЕМА ПАРК)</a>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        const greetings = ["Здравствуйте!", "Приветствую!", "Добрый день!"];
+        const intros = ["Пишу вам от лица группы зрителей в г. Сочи.", "Обращаюсь от имени фанатов из Сочи."];
+        const cores = ["4-7 июня 2026 г. будет премьера финала УЦЦ.", "В июне 2026 выходит «Гранд-финал» Цифрового Цирка."];
+        const argumentsList = ["Учитывая успех «Дандадана», просим добавить УЦЦ в МореМолл.", "Просим включить 9 серию в расписание, спрос будет огромным!"];
+        const conclusions = ["Гарантируем полные залы!", "Не упустите главный релиз года!", "Ждем предзаказы!"];
+
         function getRandom(array) {
             return array[Math.floor(Math.random() * array.length)];
         }
 
-        // Основная функция генерации
         function generateText() {
-            const result = ${getRandom(greetings)} ${getRandom(intros)}\n\n${getRandom(cores)} ${getRandom(details)}\n\n${getRandom(argumentsList)} ${getRandom(conclusions)};
-            document.getElementById("resultText").value = result;
+            const text = ${getRandom(greetings)} ${getRandom(intros)}\n\n${getRandom(cores)}\n\n${getRandom(argumentsList)} ${getRandom(conclusions)};
+            document.getElementById("resultText").value = text;
         }
-
-        // Функция копирования
-        function copyText() {
-            const textToCopy = document.getElementById("resultText");
-            if (!textToCopy.value) return;
-            
-            textToCopy.select();
-            document.execCommand("copy");
-            
-            // Всплывающее уведомление Telegram
-            tg.showAlert("Текст успешно скопирован! Теперь вы можете вставить его на сайте.");
-        }
-    </script>
-</body>
-</html>
