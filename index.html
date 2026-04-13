@@ -4,34 +4,73 @@
     <meta charset="UTF-8">
     <title>Меню написания</title>
     <style>
-        body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .card { background: #1e1e1e; padding: 25px; border-radius: 15px; width: 90%; max-width: 450px; text-align: center; box-shadow: 0 10px 30px #000; }
-        h2 { color: #00d2ff; }
-        textarea { width: 100%; height: 250px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; resize: none; box-sizing: border-box; font-size: 14px; }
-        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background: #00d2ff; color: #000; font-size: 16px; }
-        .btn-copy { background: #333; color: #fff; margin-top: 10px; }
+        body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; box-sizing: border-box; }
+        .card { background: #1e1e1e; padding: 20px; border-radius: 15px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 10px 30px #000; }
+        h2 { color: #00d2ff; margin-bottom: 15px; }
+        textarea { width: 100%; height: 260px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; resize: none; box-sizing: border-box; font-size: 14px; line-height: 1.5; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; background: #00d2ff; color: #000; }
+        .btn-cp { background: #333; color: #fff; margin-top: 10px; }
+        .btn-link { background: #ff4d4d; color: #fff; text-decoration: none; display: block; line-height: 50px; border-radius: 8px; margin-top: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="card">
         <h2>Меню написания 🤡</h2>
-        <button onclick="gen()">СГЕНЕРИРОВАТЬ ПИСЬМО</button>
-        <textarea id="res" readonly placeholder="Нажми кнопку..."></textarea>
-        <button class="btn-copy" onclick="cp()">СКОПИРОВАТЬ</button>
+        <button onclick="generate()">СГЕНЕРИРОВАТЬ ТЕКСТ</button>
+        <textarea id="output" readonly placeholder="Нажми кнопку выше..."></textarea>
+        <button class="btn-cp" onclick="copyText()">СКОПИРОВАТЬ</button>
+        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">САЙТ СИНЕМА ПАРК</a>
     </div>
 
     <script>
-        function gen() {
-            var s = "Здравствуйте! Мы, зрители Центрального района Сочи, просим вас добавить 9 серию УЦЦ в расписание КИНО МореМолл. В Сочи у проекта огромная фан-база, узнаваемость почти 100%. Мы гарантируем полную заполняемость залов и высокий спрос на билеты. Не упустите главный анимационный релиз года!";
-            document.getElementById("res").value = s;
+        function rnd(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+        function generate() {
+            // Часть 1: Приветствие
+            var p1 = ["Здравствуйте!", "Добрый день!", "Приветствуем!", "Доброго времени суток!"];
+            
+            // Часть 2: Кто пишет
+            var p2 = [
+                "Мы, зрители Центрального района Сочи,",
+                "Группа киноманов и жителей Сочи",
+                "Мы, активные фанаты из Центрального района,",
+                "Представители зрительской аудитории города Сочи"
+            ];
+            
+            // Часть 3: Просьба
+            var p3 = [
+                "просим вас добавить 9 серию УЦЦ в расписание КИНО МореМолл.",
+                "очень ждем включения финального эпизода УЦЦ в афишу МореМолла.",
+                "хотим увидеть премьеру 9 серии УЦЦ на большом экране вашего кинотеатра.",
+                "надеемся на организацию показов финала УЦЦ в КИНО МореМолл."
+            ];
+            
+            // Часть 4: Аргументы (фан-база)
+            var p4 = [
+                "В Сочи у проекта огромная фан-база, узнаваемость почти 100%.",
+                "Популярность этого проекта в нашем городе колоссальна.",
+                "Мы знаем, что в Сочи этот релиз ждут тысячи людей.",
+                "УЦЦ — невероятно востребованный проект среди сочинской молодежи."
+            ];
+            
+            // Часть 5: Гарантии
+            var p5 = [
+                "Мы гарантируем полную заполняемость залов и высокий спрос на билеты.",
+                "Аншлаг и полная посадка в залах будут обеспечены.",
+                "Уверены, что билеты на сеансы будут раскуплены мгновенно.",
+                "Высокий интерес и заполненные залы мы вам гарантируем."
+            ];
+            
+            // Часть 6: Финал
+            var p6 = [
+                "Не упустите главный анимационный релиз года!",
+                "Ждем это событие на ваших экранах!",
+                "Такую премьеру нельзя пропускать!",
+                "Надеемся на положительное решение!"
+            ];
+
+            // Собираем всё в одну кучу
+            var final = rnd(p1) + " " + rnd(p2) + " " + rnd(p3) + "\n\n" + rnd(p4) + " " + rnd(p5) + " " + rnd(p6);
+            
+            document.getElementById("output").value = final;
         }
-        function cp() {
-            var b = document.getElementById("res");
-            if (b.value === "") return;
-            b.select();
-            document.execCommand("copy");
-            alert("Скопировано!");
-        }
-    </script>
-</body>
-</html>
