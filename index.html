@@ -4,73 +4,80 @@
     <meta charset="UTF-8">
     <title>Меню написания</title>
     <style>
-        body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; box-sizing: border-box; }
-        .card { background: #1e1e1e; padding: 20px; border-radius: 15px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 10px 30px #000; }
-        h2 { color: #00d2ff; margin-bottom: 15px; }
-        textarea { width: 100%; height: 260px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 12px; margin: 15px 0; resize: none; box-sizing: border-box; font-size: 14px; line-height: 1.5; }
-        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; background: #00d2ff; color: #000; }
+        body { background: #121212; color: #fff; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .card { background: #1e1e1e; padding: 25px; border-radius: 15px; width: 100%; max-width: 650px; text-align: center; box-shadow: 0 10px 40px #000; }
+        h2 { color: #00d2ff; margin-top: 0; }
+        textarea { width: 100%; height: 400px; background: #2b2b2b; color: #fff; border: 1px solid #444; border-radius: 10px; padding: 15px; margin: 15px 0; font-size: 14px; line-height: 1.5; resize: none; box-sizing: border-box; }
+        button { width: 100%; padding: 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background: #00d2ff; color: #000; font-size: 16px; transition: 0.2s; }
+        button:active { transform: scale(0.98); }
         .btn-cp { background: #333; color: #fff; margin-top: 10px; }
-        .btn-link { background: #ff4d4d; color: #fff; text-decoration: none; display: block; line-height: 50px; border-radius: 8px; margin-top: 15px; font-weight: bold; }
+        .btn-link { background: #ff4d4d; color: #fff; text-decoration: none; display: block; line-height: 55px; border-radius: 8px; margin-top: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="card">
         <h2>Меню написания 🤡</h2>
-        <button onclick="generate()">СГЕНЕРИРОВАТЬ ТЕКСТ</button>
-        <textarea id="output" readonly placeholder="Нажми кнопку выше..."></textarea>
-        <button class="btn-cp" onclick="copyText()">СКОПИРОВАТЬ</button>
-        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">САЙТ СИНЕМА ПАРК</a>
+        <button onclick="generate()">СГЕНЕРИРОВАТЬ УНИКАЛЬНОЕ ПИСЬМО</button>
+        <textarea id="output" readonly placeholder="Нажми на синюю кнопку..."></textarea>
+        <button class="btn-cp" onclick="copyText()">СКОПИРОВАТЬ ТЕКСТ</button>
+        <a href="https://kinoteatr.ru/feedback/" target="_blank" class="btn-link">ПЕРЕЙТИ В СИНЕМА ПАРК</a>
     </div>
 
     <script>
-        function rnd(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function r(a) { return a[Math.floor(Math.random() * a.length)]; }
 
         function generate() {
-            // Часть 1: Приветствие
-            var p1 = ["Здравствуйте!", "Добрый день!", "Приветствуем!", "Доброго времени суток!"];
+            // Блоки с синонимами для уникальности
+            var v1 = ["Здравствуйте!", "Добрый день!", "Приветствуем руководство КИНО МореМолл!", "Доброго времени суток!"];
             
-            // Часть 2: Кто пишет
-            var p2 = [
-                "Мы, зрители Центрального района Сочи,",
-                "Группа киноманов и жителей Сочи",
-                "Мы, активные фанаты из Центрального района,",
-                "Представители зрительской аудитории города Сочи"
-            ];
-            
-            // Часть 3: Просьба
-            var p3 = [
-                "просим вас добавить 9 серию УЦЦ в расписание КИНО МореМолл.",
-                "очень ждем включения финального эпизода УЦЦ в афишу МореМолла.",
-                "хотим увидеть премьеру 9 серии УЦЦ на большом экране вашего кинотеатра.",
-                "надеемся на организацию показов финала УЦЦ в КИНО МореМолл."
-            ];
-            
-            // Часть 4: Аргументы (фан-база)
-            var p4 = [
-                "В Сочи у проекта огромная фан-база, узнаваемость почти 100%.",
-                "Популярность этого проекта в нашем городе колоссальна.",
-                "Мы знаем, что в Сочи этот релиз ждут тысячи людей.",
-                "УЦЦ — невероятно востребованный проект среди сочинской молодежи."
-            ];
-            
-            // Часть 5: Гарантии
-            var p5 = [
-                "Мы гарантируем полную заполняемость залов и высокий спрос на билеты.",
-                "Аншлаг и полная посадка в залах будут обеспечены.",
-                "Уверены, что билеты на сеансы будут раскуплены мгновенно.",
-                "Высокий интерес и заполненные залы мы вам гарантируем."
-            ];
-            
-            // Часть 6: Финал
-            var p6 = [
-                "Не упустите главный анимационный релиз года!",
-                "Ждем это событие на ваших экранах!",
-                "Такую премьеру нельзя пропускать!",
-                "Надеемся на положительное решение!"
+            var v2 = [
+                "Обращаюсь к вам от лица инициативной группы зрителей и фан-сообщества города Сочи.",
+                "Пишу вам по поручению активного сообщества любителей анимации г. Сочи.",
+                "От имени большой группы кинозрителей Сочи хотим заявить о своем интересе к вашему репертуару.",
+                "К вам обращается инициативная группа фанатов современного кино из Сочи."
             ];
 
-            // Собираем всё в одну кучу
-            var final = rnd(p1) + " " + rnd(p2) + " " + rnd(p3) + "\n\n" + rnd(p4) + " " + rnd(p5) + " " + rnd(p6);
+            var v3 = [
+                "Мы внимательно следим за афишей «КИНО МореМолл» и очень ценим ваш профессиональный подход к громким анимационным премьерам.",
+                "Наше сообщество постоянно мониторит расписание вашего кинотеатра, так как нам нравится качество показов в МореМолле.",
+                "Мы являемся постоянными зрителями «КИНО МореМолл» и всегда рады видеть в залах качественные мировые новинки."
+            ];
+
+            // Основная суть (НЕ МЕНЯЕТСЯ)
+            var mainBody = "В связи с этим просим вас рассмотреть возможность включения в расписание показа гранд-финала мирового хита «Удивительный Цифровой Цирк» (The Amazing Digital Circus: Final Act) от студии Glitch Productions.";
             
-            document.getElementById("output").value = final;
+            var info = "\n\nПочему это важно:\n- Дата мировой премьеры: 4–7 июня 2026 года.\n- Огромный спрос: Проект — самое ожидаемое анимационное событие года.\n- Готовая аудитория: Фан-база координируется через канал: https://t.me/+wDP_MX3aQjM5M2Uy.\n- Эксклюзивность: Показ финала на большом экране станет уникальным событием.";
+
+            var v4 = [
+                "Мы готовы оказать полную информационную поддержку и скоординировать зрителей для организованного выкупа билетов.",
+                "Наше сообщество возьмет на себя оповещение зрителей, чтобы обеспечить максимальную заполняемость залов на премьере.",
+                "Мы гарантируем активный интерес аудитории и готовы помочь с организацией массового посещения сеансов."
+            ];
+            var v5 = [
+                "Если для данного релиза требуется формат аренды зала или коллективной заявки, просим сообщить условия и актуальную стоимость.",
+                "Будем признательны, если вы уточните условия для коллективного бронирования или аренды зала под данный показ.",
+                "Просим вас проинформировать нас о возможности выкупа сеанса или условиях групповой заявки."
+            ];
+
+            var contacts = "\n\nДля обратной связи, пожалуйста, пишите на почту нашего главы: violentionkosuko@gmail.com";
+            
+            var v6 = [
+                "\n\nНадеемся на положительное решение. \nС уважением, Инициативная группа зрителей г. Сочи",
+                "\n\nЗаранее благодарим за ответ. \nС наилучшими пожеланиями, группа зрителей Сочи",
+                "\n\nЖдем вашего решения с нетерпением. \nС уважением, сообщество фанатов г. Сочи"
+            ];
+
+            // Сборка
+            document.getElementById("output").value = r(v1) + "\n\n" + r(v2) + "\n" + r(v3) + "\n\n" + mainBody + info + "\n\n" + r(v4) + " " + r(v5) + contacts + r(v6);
         }
+
+        function copyText() {
+            var o = document.getElementById("output");
+            if(!o.value) return;
+            o.select();
+            document.execCommand("copy");
+            alert("Текст скопирован!");
+        }
+    </script>
+</body>
+</html>
